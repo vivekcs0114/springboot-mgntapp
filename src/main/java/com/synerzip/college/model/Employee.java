@@ -1,19 +1,24 @@
 package com.synerzip.college.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String address;
     private boolean active;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dep_id")
     private Department department;
 
+    @JsonIgnore
     public Department getDepartment() {
         return department;
     }
@@ -25,11 +30,11 @@ public class Employee {
     public Employee() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,22 +62,11 @@ public class Employee {
         this.active = active;
     }
 
-    public Employee(int id, String name, String address, boolean active, Department department) {
+    public Employee(Integer id, String name, String address, boolean active, Department department) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.active = active;
         this.department = department;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", active=" + active +
-                ", department=" + department +
-                '}';
     }
 }
