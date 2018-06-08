@@ -1,25 +1,28 @@
 package com.synerzip.college.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Department {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Department  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private List<Employee> employees;
 
     public Department() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,18 +42,9 @@ public class Department {
         this.employees = employees;
     }
 
-    public Department(int id, String name, List<Employee> employees) {
+    public Department(Integer id, String name, List<Employee> employees) {
         this.id = id;
         this.name = name;
         this.employees = employees;
-    }
-
-    @Override
-    public String toString() {
-        return "Department{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employees=" + employees +
-                '}';
     }
 }
