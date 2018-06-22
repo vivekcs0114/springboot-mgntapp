@@ -1,0 +1,3 @@
+application:
+  property:
+    url: http://localhost:8080

@@ -16,6 +16,7 @@ public class DepartmentController {
 
     @GetMapping("/{id}")
     public Department getDepartment(@PathVariable("id") Integer id) {
+        System.out.println(departmentService.loadProperty());
         return departmentService.getDepartment(id);
     }
 
