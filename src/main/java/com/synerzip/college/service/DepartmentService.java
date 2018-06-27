@@ -6,6 +6,7 @@ import com.synerzip.college.repository.DepartmentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,6 +16,13 @@ import java.util.List;
 public class DepartmentService {
 
     private static final Logger log = LoggerFactory.getLogger(CollegeController.class);
+
+    @Value("${application.property.url}")
+    private String url;
+
+    public String loadProperty() {
+        return url;
+    }
 
     @Autowired
     DepartmentRepository departmentRepository;

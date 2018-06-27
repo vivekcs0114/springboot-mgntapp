@@ -14,6 +14,15 @@ public class Department  {
     private String name;
     @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private List<Employee> employees;
+    private String overview;
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
 
     public Department() {
     }
@@ -42,9 +51,10 @@ public class Department  {
         this.employees = employees;
     }
 
-    public Department(Integer id, String name, List<Employee> employees) {
+    public Department(Integer id, String name, List<Employee> employees, String overview) {
         this.id = id;
         this.name = name;
         this.employees = employees;
+        this.overview = overview;
     }
 }
