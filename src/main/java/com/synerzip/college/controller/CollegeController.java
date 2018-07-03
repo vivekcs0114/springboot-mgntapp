@@ -1,20 +1,30 @@
 package com.synerzip.college.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.synerzip.college.exception.CarNotFoundException;
+import com.synerzip.college.model.Car;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.synerzip.college.service.CarService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CollegeController {
 
-    private static final Logger log = LoggerFactory.getLogger(CollegeController.class);
+    CarService service;
 
-    @RequestMapping("/")
-    public String sayHello() {
-        log.info("sayHello method invoked from collegeController");
-        return "hello";
+    public CollegeController(CarService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/colleges/{name}")
+    public Car sayHello(@PathVariable String name) {
+        return service.getCarDetails(name);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private void carNotFoundHandler(CarNotFoundException ex) {
+
     }
 
 }
