@@ -14,7 +14,7 @@ public class Employee {
     private String name;
     private String address;
     private boolean active;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dep_id")
     private Department department;
 
