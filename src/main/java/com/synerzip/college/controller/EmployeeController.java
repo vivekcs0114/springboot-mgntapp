@@ -20,8 +20,9 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> getAllEmployee() {
-        return employeeService.getAllEmployee();
+    public List<Employee> getAllEmployee(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "3") int limit) {
+        return employeeService.getAllEmployee(page, limit);
     }
 
     @PostMapping

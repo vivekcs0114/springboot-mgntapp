@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -38,8 +40,9 @@ public class DepartmentService {
         return department;
     }
 
-    public List<Department> getAllDepartment() {
-        return departmentRepository.findAll();
+    public List<Department> getAllDepartment(int page, int limit) {
+        Page<Department> results = departmentRepository.findAll(PageRequest.of(page, limit));
+        return results.getContent();
     }
 
     public Department addDepartment(Department department) {

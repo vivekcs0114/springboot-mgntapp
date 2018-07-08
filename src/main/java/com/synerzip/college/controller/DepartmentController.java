@@ -21,8 +21,9 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> getAllDepartment() {
-        return departmentService.getAllDepartment();
+    public List<Department> getAllDepartment(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "3") int limit) {
+        return departmentService.getAllDepartment(page, limit);
     }
 
     @PostMapping

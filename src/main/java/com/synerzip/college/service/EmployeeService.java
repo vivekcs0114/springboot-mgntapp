@@ -8,6 +8,8 @@ import com.synerzip.college.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -35,8 +37,9 @@ public class EmployeeService {
         return employee;
     }
 
-    public List<Employee> getAllEmployee() {
-        return employeeRepository.findAll();
+    public List<Employee> getAllEmployee(int page, int limit) {
+        Page<Employee> results = employeeRepository.findAll(PageRequest.of(page, limit));
+        return results.getContent();
     }
 
     public List<Employee> getAllEmployeeFromDepartment(Integer depId) {
